@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVT 1AC - Tâches & Exercices Corrigés</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4f0f5 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #1e5c34 0%, #2c8c4b 100%);
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .period-badge {
+            display: inline-block;
+            background-color: #ff9800;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        /* Navigation tabs */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            background: white;
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 15px 30px;
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 10px;
+            margin: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tab-btn:hover {
+            background-color: #f0f7ff;
+            color: #2196F3;
+        }
+
+        .tab-btn.active {
+            background-color: #2c8c4b;
+            color: white;
+        }
+
+        /* Content sections */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Task grid */
+        .tasks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .task-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-top: 6px solid;
+        }
+
+        .task-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .task-card.task-2 { border-top-color: #2c8c4b; }
+        .task-card.task-3 { border-top-color: #2196F3; }
+        .task-card.task-4 { border-top-color: #9C27B0; }
+        .task-card.task-5 { border-top-color: #FF9800; }
+        .task-card.task-6 { border-top-color: #F44336; }
+
+        .task-header {
+            padding: 25px 25px 15px;
+            color: white;
+            position: relative;
+        }
+
+        .task-header.task-2 { background: linear-gradient(135deg, #1e5c34 0%, #2c8c4b 100%); }
+        .task-header.task-3 { background: linear-gradient(135deg, #1565C0 0%, #2196F3 100%); }
+        .task-header.task-4 { background: linear-gradient(135deg, #7B1FA2 0%, #9C27B0 100%); }
+        .task-header.task-5 { background: linear-gradient(135deg, #F57C00 0%, #FF9800 100%); }
+        .task-header.task-6 { background: linear-gradient(135deg, #D32F2F 0%, #F44336 100%); }
+
+        .task-number {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .task-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .task-icon {
+            font-size: 2rem;
+        }
+
+        /* Exercises section */
+        .exercises-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            color: #1e5c34;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #e8f5e9;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .exercises-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .exercises-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .exercise-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            border-left: 5px solid #2c8c4b;
+            transition: all 0.3s;
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .exercise-number {
+            display: inline-block;
+            background-color: #2c8c4b;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .exercise-question {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .correction-btn {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .correction-btn:hover {
+            background-color: #3a7bc8;
+            transform: translateY(-2px);
+        }
+
+        .correction {
+            margin-top: 15px;
+            padding: 20px;
+            background-color: #f0f7ff;
+            border-radius: 10px;
+            border-left: 4px solid #4a90e2;
+            display: none;
+        }
+
+        .correction.show {
+            display: block;
+            animation: slideDown 0.5s;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; max-height: 0; }
+            to { opacity: 1; max-height: 500px; }
+        }
+
+        .correction-title {
+            color: #3a7bc8;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .competence-badge {
+            display: inline-block;
+            background-color: #e8f5e9;
+            color: #2c8c4b;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.9rem;
+            border: 1px solid #c8e6c9;
+        }
+
+        .emoji {
+            font-size: 1.3rem;
+            margin-right: 8px;
+        }
+
+        /* Modal */
+        .detail-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .detail-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            border-radius: 15px;
+            overflow: hidden;
+            transform: translateY(-50px);
+            transition: transform 0.3s;
+        }
+
+        .detail-modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 25px;
+            color: white;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-body {
+            padding: 30px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .step-list {
+            list-style-type: none;
+            margin: 20px 0;
+        }
+
+        .step-list li {
+            padding: 12px 0 12px 40px;
+            position: relative;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .step-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 28px;
+            height: 28px;
+            background-color: #2c8c4b;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            background: white;
+            border-radius: 15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .tasks-grid { grid-template-columns: 1fr; }
+            .tab-btn { padding: 12px 20px; font-size: 1rem; }
+            .section-title { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 SVT - 1ère Année Collège</h1>
+            <p class="subtitle">Tâches Pédagogiques & Exercices Corrigés</p>
+            <div class="period-badge">Période 1 - Sciences de la Vie et de la Terre</div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="showSection('tasks')">
+                <span>📋</span> Toutes les Tâches
+            </button>
+            <button class="tab-btn" onclick="showSection('exercises')">
+                <span>📝</span> Tous les Exercices
+            </button>
+            <button class="tab-btn" onclick="showSection('task2')">
+                <span>🌳</span> Tâche 2
+            </button>
+            <button class="tab-btn" onclick="showSection('task3')">
+                <span>🦊</span> Tâche 3
+            </button>
+            <button class="tab-btn" onclick="showSection('task4')">
+                <span>🌿</span> Tâche 4
+            </button>
+            <button class="tab-btn" onclick="showSection('task5')">
+                <span>🔬</span> Tâche 5
+            </button>
+            <button class="tab-btn" onclick="showSection('task6')">
+                <span>💨</span> Tâche 6
+            </button>
+        </div>
+
+        <!-- All Tasks Section -->
+        <section id="tasks" class="content-section active">
+            <h2 class="section-title">📋 Toutes les Tâches de la Période 1</h2>
+            <div class="tasks-grid">
+                <!-- Task 2 Card -->
+                <div class="task-card task-2" onclick="showTaskDetails(2)">
+                    <div class="task-header task-2">
+                        <div class="task-number">TÂCHE 2</div>
+                        <h2 class="task-title"><span class="task-icon">🌳</span> Diversité des Écosystèmes</h2>
+                        <div class="task-theme">Biocénose et Biotope</div>
+                    </div>
+                    <div class="task-content" style="padding: 25px;">
+                        <p><strong>Objectif :</strong> Déduire la diversité des écosystèmes et justifier leur unité</p>
+                        <p><strong>Exercices :</strong> 4 exercices corrigés disponibles</p>
+                        <button class="correction-btn" style="margin-top: 15px; width: 100%;" onclick="showSection('task2')">
+                            Voir les exercices
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Task 3 Card -->
+                <div class="task-card task-3" onclick="showTaskDetails(3)">
+                    <div class="task-header task-3">
+                        <div class="task-number">TÂCHE 3</div>
+                        <h2 class="task-title"><span class="task-icon">🦊</span> Groupes d'Animaux</h2>
+                        <div class="task-theme">Classification animale</div>
+                    </div>
+                    <div class="task-content" style="padding: 25px;">
+                        <p><strong>Objectif :</strong> Déterminer le groupe d'un animal</p>
+                        <p><strong>Exercices :</strong> 5 exercices corrigés disponibles</p>
+                        <button class="correction-btn" style="margin-top: 15px; width: 100%;" onclick="showSection('task3')">
+                            Voir les exercices
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Task 4 Card -->
+                <div class="task-card task-4" onclick="showTaskDetails(4)">
+                    <div class="task-header task-4">
+                        <div class="task-number">TÂCHE 4</div>
+                        <h2 class="task-title"><span class="task-icon">🌿</span> Groupes de Végétaux</h2>
+                        <div class="task-theme">Classification végétale</div>
+                    </div>
+                    <div class="task-content" style="padding: 25px;">
+                        <p><strong>Objectif :</strong> Déterminer le groupe d'un végétal</p>
+                        <p><strong>Exercices :</strong> 3 exercices corrigés disponibles</p>
+                        <button class="correction-btn" style="margin-top: 15px; width: 100%;" onclick="showSection('task4')">
+                            Voir les exercices
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Task 5 Card -->
+                <div class="task-card task-5" onclick="showTaskDetails(5)">
+                    <div class="task-header task-5">
+                        <div class="task-number">TÂCHE 5</div>
+                        <h2 class="task-title"><span class="task-icon">🔬</span> Démarche Scientifique</h2>
+                        <div class="task-theme">Investigation expérimentale</div>
+                    </div>
+                    <div class="task-content" style="padding: 25px;">
+                        <p><strong>Objectif :</strong> Identifier les étapes de la démarche d'investigation</p>
+                        <p><strong>Exercices :</strong> 3 exercices corrigés disponibles</p>
+                        <button class="correction-btn" style="margin-top: 15px; width: 100%;" onclick="showSection('task5')">
+                            Voir les exercices
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Task 6 Card -->
+                <div class="task-card task-6" onclick="showTaskDetails(6)">
+                    <div class="task-header task-6">
+                        <div class="task-number">TÂCHE 6</div>
+                        <h2 class="task-title"><span class="task-icon">💨</span> Respiration Animale</h2>
+                        <div class="task-theme">Protocole expérimental</div>
+                    </div>
+                    <div class="task-content" style="padding: 25px;">
+                        <p><strong>Objectif :</strong> Élaborer un protocole expérimental</p>
+                        <p><strong>Exercices :</strong> 4 exercices corrigés disponibles</p>
+                        <button class="correction-btn" style="margin-top: 15px; width: 100%;" onclick="showSection('task6')">
+                            Voir les exercices
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- All Exercises Section -->
+        <section id="exercises" class="content-section">
+            <h2 class="section-title">📝 Tous les Exercices Corrigés</h2>
+            <p style="margin-bottom: 30px; font-size: 1.1rem; color: #666;">
+                Sélectionnez une tâche pour voir ses exercices spécifiques, ou parcourez tous les exercices ci-dessous.
+            </p>
+            
+            <!-- Tâche 2 Exercises -->
+            <div style="margin-bottom: 40px;">
+                <h3 style="color: #2c8c4b; margin-bottom: 20px; font-size: 1.5rem; display: flex; align-items: center; gap: 10px;">
+                    <span>🌳</span> Tâche 2 : Diversité des Écosystèmes
+                </h3>
+                <div class="exercises-grid">
+                    <!-- Exercise 1 -->
+                    <div class="exercise-card">
+                        <div class="exercise-number">1</div>
+                        <div class="exercise-question">
+                            <p><strong>Identifier un être vivant :</strong><br>
+                            Parmi les éléments suivants, lequel est un être vivant ?<br>
+                            a. Une roche<br>
+                            b. L'eau<br>
+                            c. Un oiseau<br>
+                            d. Le sable</p>
+                        </div>
+                        <button class="correction-btn" onclick="toggleCorrection('ex1')">
+                            <span>👁️</span> Voir la correction
+                        </button>
+                        <div class="correction" id="ex1">
+                            <div class="correction-title"><span>✅</span> Correction</div>
+                            <p><strong>Réponse correcte : c. Un oiseau 🐦</strong></p>
+                            <p><strong>Explication :</strong> Un être vivant se caractérise par :</p>
+                            <ul>
+                                <li>La croissance 📈</li>
+                                <li>La respiration 💨</li>
+                                <li>La nutrition 🍎</li>
+                                <li>La reproduction 🥚</li>
+                            </ul>
+                            <p>L'oiseau présente toutes ces caractéristiques, contrairement aux roches, à l'eau et au sable qui sont des éléments non-vivants (biotope).</p>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 2 -->
+                    <div class="exercise-card">
+                        <div class="exercise-number">2</div>
+                        <div class="exercise-question">
+                            <p><strong>Caractéristiques du vivant :</strong><br>
+                            Indiquez si ces affirmations sont vraies ou fausses :<br>
+                            1. Un être vivant grandit<br>
+                            2. Un être vivant respire<br>
+                            3. Citez une autre caractéristique du vivant</p>
+                        </div>
+                        <button class="correction-btn" onclick="toggleCorrection('ex2')">
+                            <span>👁️</span> Voir la correction
+                        </button>
+                        <div class="correction" id="ex2">
+                            <div class="correction-title"><span>✅</span> Correction</div>
+                            <p><strong>Réponses :</strong></p>
+                            <p>1. <strong>VRAI</strong> ✓ - Un être vivant grandit 📈</p>
+                            <p>2. <strong>VRAI</strong> ✓ - Un être vivant respire 💨</p>
+                            <p>3. <strong>Autres caractéristiques :</strong></p>
+                            <ul>
+                                <li>La reproduction 🥚</li>
+                                <li>La nutrition 🍎</li>
+                                <li>La réaction aux stimuli ⚡</li>
+                                <li>L'élimination des déchets 🗑️</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tâche 2 Section -->
+        <section id="task2" class="content-section">
+            <h2 class="section-title"><span>🌳</span> Tâche 2 : Diversité des Écosystèmes</h2>
+            <div class="exercises-section">
+                <h3 style="color: #2c8c4b; margin-bottom: 25px; font-size: 1.3rem;">📚 4 Exercices Corrigés</h3>
+                
+                <div class="exercises-grid">
+                    <!-- Exercise 1 - Tâche 2 -->
+                    <div class="exercise-card">
+                        <div class="exercise-number">1</div>
+                        <div class="exercise-question">
+                            <p><strong>Identifier un être vivant :</strong><br>
+                            Parmi les éléments suivants, lequel est un être vivant ?<br>
+                            a. Une roche<br>
+                            b. L'eau<br>
+                            c. Un oiseau<br>
+                            d. Le sable</p>
+                        </div>
+                        <button class="correction-btn" onclick="toggleCorrection('task2-ex1')">
+                            <span>👁️</span> Voir la correction
+                        </button>
+                        <div class="correction" id="task2-ex1">
+                            <div class="correction-title"><span>✅</span> Correction</div>
+                            <p><strong>Réponse correcte : c. Un oiseau 🐦</strong></p>
+                            <p><strong>Explication :</strong> Un être vivant se caractérise par :</p>
+                            <ul>
+                                <li>La croissance 📈</li>
+                                <li>La respiration 💨</li>
+                                <li>La nutrition 🍎</li>
+                                <li>La reproduction 🥚</li>
+                            </ul>
+                            <p>L'oiseau présente toutes ces caractéristiques, contrairement aux roches, à l'eau et au sable qui sont des éléments non-vivants (biotope).</p>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 2 - Tâche 2 -->
+                    <div class="exercise-card">
+                        <div class="exercise-number">2</div>
+                        <div class="exercise-question">
+                            <p><strong>Biocénose et biotope :</strong><br>
+                            Pour l'écosystème forêt, classez ces éléments :<br>
+                            1. Chêne vert 🌳<br>
+                            2. Cerf 🦌<br>
+                            3. Champignon 🍄<br>
+                            4. Sol<br>
+                            5. Roche</p>
+                        </div>
+                        <button class="correction-btn" onclick="toggleCorrection('task2-ex2')">
+                            <span>👁️</span> Voir la correction
+                        </button>
+                        <div class="correction" id="task2-ex2">
+                            <div class="correction-title"><span>✅</span> Correction</div>
+                            <p><strong>Classification :</strong></p>
+                            <p><strong>Biocénose</strong> (êtres vivants) :</p>
+                            <ul>
+                                <li>Chêne vert 🌳 (végétal)</li>
+                                <li>Cerf 🦌 (animal)</li>
+                                <li>Champignon 🍄 (fonge)</li>
+                            </ul>
+                            <p><strong>Biotope</strong> (éléments non-vivants) :</p>
+                            <ul>
+                                <li>Sol</li>
+                                <li>Roche</li>
+                            </ul>
+                            <p><strong>Rappel :</strong> La biocénose + le biotope = l'écosystème 🌍</p>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 3 - Tâche 2 -->
+                    <div class="exercise-card">
+                        <div class="exercise-number">3</div>
+                        <div class="exercise-question">
+                            <p><strong>Comparaison d'écosystèmes :</strong><br>
+                            Complétez :<br>
+                            L'écosystème forestier contient ______, tandis que l'écosystème désertique contient ______.<br>
+                            L'écosystème forestier contient le ______, alors que l'écosystème désertique contient le ______.</p>
+                        </div>
+                        <button class="correction-btn" onclick="toggleCorrection('task2-ex3')">
+                            <span>👁️</span> Voir la correction
+                        </button>
+                        <div class="correction" id="task2-ex3">
+                            <div class="correction-title"><span>✅</span> Correction</div>
+                            <p><strong>Réponses complètes :</strong></p>
+                            <p>1. L'écosystème forestier contient <strong>du sol fertile</strong>, tandis que l'écosystème désertique contient <strong>du sable 🏜️</strong>.</p>
+                            <p>2. L'écosystème forestier contient le <strong>chêne vert 🌳</strong>, alors que l'écosystème désertique contient le <strong>cactus 🌵</strong>.</p>
+                            <p><strong>Explication :</strong> Cette différence montre la <strong>diversité</strong> des écosystèmes, mais ils ont tous une <strong>unité</strong> structurelle (biocénose + biotope).</p>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 4 - Tâche 2 -->
+                    <div class="exercise-card">
+                        <div class="exercise-number">4</div>
+                        <div class="exercise-question">
+                            <p><strong>Diversité et unité :</strong><br>
+                            Complétez la phrase :<br>
+                            Les deux écosystèmes présentent des ______ différents et des ______ différents, ce qui montre leur ______.<br>
+                            Les deux écosystèmes sont constitués d'un ______ et d'une ______, ce qui montre leur ______.</p>
+                        </div>
+                        <button class="correction-btn" onclick="toggleCorrection('task2-ex4')">
+                            <span>👁️</span> Voir la correction
+                        </button>
+                        <div class="correction" id="task2-ex4">
+                            <div class="correction-title"><span>✅</span> Correction</div>
+                            <p><strong>Réponses complètes :</strong></p>
+                            <p>1. Les deux écosystèmes présentent des <strong>êtres vivants</strong> différents et des <strong>éléments non-vivants</strong> différents, ce qui montre leur <strong>diversité</strong> 🌍.</p>
+                            <p>2. Les deux écosystèmes sont constitués d'un <strong>biotope</strong> et d'une <strong>biocénose</strong>, ce qui montre leur <strong>unité</strong> 🔗.</p>
+                            <p><strong>Conclusion :</strong> Tous les écosystèmes sont diversifiés mais unis par leur structure commune.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tâche 3 Section -->
+        <section id="task3" class="content-section">
+            <h2 class="section-title"><span>🦊</span> Tâche 3 : Groupes d'Animaux</h2>
+            <div class="exercises-section">
+                <h3 style="color: #2196F3; margin-bottom: 25px; font-size: 1.3rem;">📚 5 Exercices Corrigés</h3>
+                
+                <div class="exercises-grid">
+                    <!-- Exercise 1 - Tâche 3 -->
+                    <div class="exercise-card">
+                        <div class="exercise-number">1</div>
+                        <div class="exercise-question">
+                            <p><strong>Le scarabée :</strong><br>
+                            Le scarabée appartient au groupe des :<br>
+                            a. Crustacés 🦀<br>
+                            b. Insectes 🪲<br>
+                            c. Myriapodes<br>
+                            d. Arachnides 🕷️</p>
+                        </div>
+                        <button class="correction-btn" onclick="toggleCorrection('task3-ex1')">
+                            <span>👁️</span> Voir la correction
+                        </button>
+                        <div class="correction" id="task3-ex1">
+                            <div class="correction-title"><span>✅</span> Correction</div>
+                            <p><strong>Réponse correcte : b. Insectes 🪲</strong></p>
+                            <p><strong>Attributs du scarabée :</strong></p>
+                            <ul>
+                                <li>Absence de colonne vertébrale (invertébré)</li>
+                                <li>Présence de 6 pattes (3 paires)</li>
+                                <li>Corps divisé en 3 parties : tête, thorax, abdomen</li>
+                                <li>Présence d'ailes (chez la plupart des insectes)</li>
+                            </ul>
+                            <p><strong>À retenir :</strong> 6 pattes = Insecte, 8 pattes = Arachnide</p>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 2 - Tâche 3 -->
+                    <div class="exercise-card">
+                        <div class="exercise-number">2</div>
+                        <div class="exercise-question">
+                            <p><strong>Attributs communs :</strong><br>
+                            Identifiez l'attribut commun à tous ces animaux :<br>
+                            Grenouille 🐸, Autruche, Canard 🦆<br>
+                            Attribut 1 : présence de colonne vertébrale<br>
+                            Attribut 2 : peau nue<br>
+                            Attribut 3 : présence de plumes</p>
+                        </div>
+                        <button class="correction-btn" onclick="toggleCorrection('task3-ex2')">
+                            <span>👁️</span> Voir la correction
+                        </button>
+                        <div class="correction" id="task3-ex2">
+                            <div class="correction-title"><span>✅</span> Correction</div>
+                            <p><strong>Réponse : Attribut 1 : présence de colonne vertébrale 🦴</strong></p>
+                            <p><strong>Explication :</strong></p>
+                            <ul>
+                                <li>Grenouille 🐸 : vertébré + peau nue</li>
+                                <li>Autruche : vertébré + plumes</li>
+                                <li>Canard 🦆 : vertébré + plumes</li>
+                            </ul>
+                            <p>L'attribut commun est la <strong>présence d'une colonne vertébrale</strong>. Ce sont tous des vertébrés.</p>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 3 - Tâche 3 -->
+                    <div class="exercise-card">
+                        <div class="exercise-number">3</div>
+                        <div class="exercise-question">
+                            <p><strong>Attribut unique :</strong><br>
+                            Identifiez l'attribut que la grenouille possède seule parmi :<br>
+                            Grenouille 🐸, Autruche, Canard 🦆<br>
+                            Attribut 1 : présence de colonne vertébrale<br>
+                            Attribut 2 : peau nue<br>
+                            Attribut 3 : présence de plumes</p>
+                        </div>
+                        <button class="correction-btn" onclick="toggleCorrection('task3-ex3')">
+                            <span>👁️</span> Voir la correction
+                        </button>
+                        <div class="correction" id="task3-ex3">
+                            <div class="correction-title"><span>✅</span> Correction</div>
+                            <p><strong>Réponse : Attribut 2 : peau nue 🐸</strong></p>
+                            <p><strong>Explication :</strong></p>
+                            <ul>
+                                <li>Grenouille : peau nue et humide (respire par la peau)</li>
+                                <li>Autruche : plumes</li>
+                                <li>Canard 🦆 : plumes</li>
+                            </ul>
+                            <p>Seule la grenouille a une <strong>peau nue</strong>, caractéristique des amphibiens.</p>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 4 - Tâche 3 -->
+                    <div class="exercise-card">
+                        <div class="exercise-number">4</div>
+                        <div class="exercise-question">
+                            <p><strong>La fourmi :</strong><br>
+                            La fourmi appartient au groupe des :<br>
+                            a. Crustacés 🦀<br>
+                            b. Insectes 🐜<br>
+                            c. Myriapodes<br>
+                            d. Arachnides 🕷️</p>
+                        </div>
+                        <button class="correction-btn" onclick="toggleCorrection('task3-ex4')">
+                            <span>👁️</span> Voir la correction
+                        </button>
+                        <div class="correction" id="task3-ex4">
+                            <div class="correction-title"><span>✅</span> Correction</div>
+                            <p><strong>Réponse correcte : b. Insectes 🐜</strong></p>
+                            <p><strong>Attributs de la fourmi :</strong></p>
+                            <ul>
+                                <li>Absence de colonne vertébrale</li>
+                                <li>6 pattes (3 paires)</li>
+                                <li>Corps divisé en 3 parties</li>
+                                <li>Antennes présentes</li>
+                            </ul>
+                            <p><strong>Clé de détermination :</strong><br>
+                            1. Colonne vertébrale ? Non → Invertébrés<br>
+                            2. Pattes ? Oui → Avec pattes<br>
+                            3. Combien de pattes ? 6 pattes → Insectes</p>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 5 - Tâche 3 -->
+                    <div class="exercise-card">
+                        <div class="exercise-number">5</div>
+                        <div class="exercise-question">
+                            <p><strong>La grenouille :</strong><br>
+                            La grenouille appartient au groupe des :<br>
+                            a. Reptiles 🦎<br>
+                            b. Mammifères 🐭<br>
+                            c. Amphibiens 🐸<br>
+                            d. Oiseaux 🦅</p>
+                        </div>
+                        <button class="correction-btn" onclick="toggleCorrection('task3-ex5')">
+                            <span>👁️</span> Voir la correction
+                        </button>
+                        <div class="correction" id="task3-ex5">
+                            <div class="correction-title"><span>✅</span> Correction</div>
+                            <p><strong>Réponse correcte : c. Amphibiens 🐸</strong></p>
+                            <p><strong>Caractéristiques des amphibiens :</strong></p>
+                            <ul>
+                                <li>Peau nue et humide (respirent par la peau)</li>
+                                <li>Vie dans l'eau et sur terre 🌊🌿</li>
+                                <li>Métamorphose (têtard → grenouille)</li>
+                                <li>Sang froid (ectothermes)</li>
+                            </ul>
+                            <p><strong>Différence avec les reptiles :</strong> Les reptiles ont des écailles sèches, les amphibiens ont la peau humide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tâche 4 Section -->
+        <section id="task4" class="content-section">
+            <h2 class="section-title"><span>🌿</span> Tâche 4 : Groupes de Végétaux</h2>
+            <div class="exercises-section">
+                <h3 style="color: #9C27B0; margin-bottom: 25px; font-size: 1.3rem;">📚 3 Exercices Corrigés</h3>
+                
+                <div class="exercises-grid">
+                    <!-- Exercise 1 - Tâche 4 -->
+                    <div class="exercise-card">
+                        <div class="exercise-number">1</div>
+                        <div class="exercise-question">
+                            <p><strong>La fougère :</strong><br>
+                            Joudia observe une fougère avec des feuilles vertes 🌿, mais sans fleurs ni graines.<br>
+                            À quel groupe appartient-elle ?</p>
+                        </div>
+                        <button class="correction-btn" onclick="toggleCorrection('task4-ex1')">
+                            <span>👁️</span> Voir la correction
+                        </button>
+                        <div class="correction" id="task4-ex1">
+                            <div class="correction-title"><span>✅</span> Correction</div>
+                            <p><strong>Réponse : Fougère appartient aux Ptéridophytes 🌿</strong></p>
+                            <p><strong>Caractéristiques des ptéridophytes :</strong></p>
+                            <ul>
+                                <li>Présence de racines, tiges et feuilles vraies</li>
+                                <li>Absence de fleurs ❌🌸</li>
+                                <li>Absence de graines ❌🌱</li>
+                                <li>Reproduction par des spores (sous les feuilles)</li>
+                                <li>Vaisseaux conducteurs de sève présents</li>
+                            </ul>
+                            <p><strong>Exemples :</strong> Fougères, prêles, lycopodes</p>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 2 - Tâche 4 -->
+                    <div class="exercise-card">
+                        <div class="exercise-number">2</div>
+                        <div class="exercise-question">
+                            <p><strong>Attributs communs :</strong><br>
+                            Identifiez l'attribut commun à ces végétaux :<br>
+                            Olivier 🫒, Sapin 🌲, Fougère 🌿<br>
+                            a. Avec tige<br>
+                            b. Avec graine<br>
+                            c. Graine dans un fruit</p>
+                        </div>
+                        <button class="correction-btn" onclick="toggleCorrection('task4-ex2')">
+                            <span>👁️</span> Voir la correction
+                        </button>
+                        <div class="correction" id="task4-ex2">
+                            <div class="correction-title"><span>✅</span> Correction</div>
+                            <p><strong>Réponse : a. Avec tige 🌿</strong></p>
+                            <p><strong>Explication :</strong></p>
+                            <ul>
+                                <li>Olivier 🫒 : tige + graines dans un fruit</li>
+                                <li>Sapin 🌲 : tige + graines dans un cône</li>
+                                <li>Fougère 🌿 : tige + pas de graines</li>
+                            </ul>
+                            <p>Le seul attribut commun aux trois est la <strong>présence d'une tige</strong> (et aussi de racines et feuilles).</p>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 3 - Tâche 4 -->
+                    <div class="exercise-card">
+                        <div class="exercise-number">3</div>
+                        <div class="exercise-question">
+                            <p><strong>La fève :</strong><br>
+                            La fève appartient au groupe des :<br>
+                            a. Angiospermes 🌺<br>
+                            b. Gymnospermes 🌲<br>
+                            c. Ptéridophytes 🌿<br>
+                            d. Bryophytes</p>
+                        </div>
+                        <button class="correction-btn" onclick="toggleCorrection('task4-ex3')">
+                            <span>👁️</span> Voir la correction
+                        </button>
+                        <div class="correction" id="task4-ex3">
+                            <div class="correction-title"><span>✅</span> Correction</div>
+                            <p><strong>Réponse correcte : a. Angiospermes 🌺</strong></p>
+                            <p><strong>Caractéristiques de la fève :</strong></p>
+                            <ul>
+                                <li>Présence de fleurs (même si discrètes)</li>
+                                <li>Graines contenues dans un fruit (la gousse)</li>
+                                <li>Plante annuelle (cycle de vie complet en 1 an)</li>
+                                <li>Fruit sec déhiscent (s'ouvre à maturité)</li>
+                            </ul>
+                            <p><strong>Angiospermes vs Gymnospermes :</strong><br>
+                            • Angiospermes : graines dans un fruit 🍎<br>
+                            • Gymnospermes : graines dans un cône 🍍</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tâche 5 Section -->
+        <section id="task5" class="content-section">
+            <h2 class="section-title"><span>🔬</span> Tâche 5 : Démarche Scientifique</h2>
+            <div class="exercises-section">
+                <h3 style="color: #FF9800; margin-bottom: 25px; font-size: 1.3rem;">📚 3 Exercices Corrigés</h3>
+                
+                <div class="exercises-grid">
+                    <!-- Exercise 1 - Tâche 5 -->
+                    <div class="exercise-card">
+                        <div class="exercise-number">1</div>
+                        <div class="exercise-question">
+                            <p><strong>Première étape :</strong><br>
+                            Quelle est la première étape de la démarche d'investigation expérimentale ?<br>
+                            a. Organiser les résultats<br>
+                            b. Formuler une hypothèse<br>
+                            c. Élaborer un protocole</p>
+                        </div>
+                        <button class="correction-btn" onclick="toggleCorrection('task5-ex1')">
+                            <span>👁️</span> Voir la correction
+                        </button>
+                        <div class="correction" id="task5-ex1">
+                            <div class="correction-title"><span>✅</span> Correction</div>
+                            <p><strong>Réponse correcte : b. Formuler une hypothèse 💡</strong></p>
+                            <p><strong>Les 5 étapes de la démarche scientifique :</strong></p>
+                            <ol>
+                                <li><strong>Se questionner</strong> ❓ (Observation d'un phénomène)</li>
+                                <li><strong>Formuler une hypothèse</strong> 💡 (Proposition de réponse)</li>
+                                <li><strong>Élaborer un protocole</strong> 📝 (Plan d'expérience)</li>
+                                <li><strong>Mettre en œuvre</strong> 🧪 (Réaliser l'expérience)</li>
+                                <li><strong>Conclure et généraliser</strong> 📊 (Analyser et interpréter)</li>
+                            </ol>
+                            <p><strong>L'hypothèse</strong> est une réponse possible et testable à la question.</p>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 2 - Tâche 5 -->
+                    <div class="exercise-card">
+                        <div class="exercise-number">2</div>
+                        <div class="exercise-question">
+                            <p><strong>Définition :</strong><br>
+                            Complétez :<br>
+                            La démarche d'investigation est un ensemble d'étapes qu'on réalise pour...</p>
+                        </div>
+                        <button class="correction-btn" onclick="toggleCorrection('task5-ex2')">
+                            <span>👁️</span> Voir la correction
+                        </button>
+                        <div class="correction" id="task5-ex2">
+                            <div class="correction-title"><span>✅</span> Correction</div>
+                            <p><strong>Réponse complète :</strong></p>
+                            <p><em>La démarche d'investigation est un ensemble d'étapes qu'on réalise pour <strong>chercher une réponse à une question scientifique</strong> 🔍.</em></p>
+                            <p><strong>Définition complète :</strong></p>
+                            <p>La démarche d'investigation expérimentale est une méthode rigoureuse qui permet :</p>
+                            <ul>
+                                <li>De résoudre un problème scientifique 🧩</li>
+                                <li>De tester des hypothées de façon objective ⚖️</li>
+                                <li>D'acquérir de nouvelles connaissances 📚</li>
+                                <li>De développer l'esprit critique 🤔</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 3 - Tâche 5 -->
+                    <div class="exercise-card">
+                        <div class="exercise-number">3</div>
+                        <div class="exercise-question">
+                            <p><strong>Étapes manquantes :</strong><br>
+                            Complétez les étapes manquantes :<br>
+                            1. Se questionner<br>
+                            2. __________<br>
+                            3. Élaborer un protocole<br>
+                            4. Mettre en œuvre<br>
+                            5. __________</p>
+                        </div>
+                        <button class="correction-btn" onclick="toggleCorrection('task5-ex3')">
+                            <span>👁️</span> Voir la correction
+                        </button>
+                        <div class="correction" id="task5-ex3">
+                            <div class="correction-title"><span>✅</span> Correction</div>
+                            <p><strong>Réponses :</strong></p>
+                            <ol>
+                                <li>Se questionner ❓</li>
+                                <li><strong>Formuler une hypothèse</strong> 💡</li>
+                                <li>Élaborer un protocole 📝</li>
+                                <li>Mettre en œuvre 🧪</li>
+                                <li><strong>Conclure et généraliser</strong> 📊</li>
+                            </ol>
+                            <p><strong>Explication de chaque étape :</strong></p>
+                            <ul>
+                                <li><strong>Hypothèse :</strong> "Si... alors..." (relation cause-effet)</li>
+                                <li><strong>Protocole :</strong> Variables, matériel, étapes</li>
+                                <li><strong>Conclusion :</strong> Valider ou infirmer l'hypothèse</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tâche 6 Section -->
+        <section id="task6" class="content-section">
+            <h2 class="section-title"><span>💨</span> Tâche 6 : Respiration Animale</h2>
+            <div class="exercises-section">
+                <h3 style="color: #F44336; margin-bottom: 25px; font-size: 1.3rem;">📚 4 Exercices Corrigés</h3>
+                
+                <div class="exercises-grid">
+                    <!-- Exercise 1 - Tâche 6 -->
+                    <div class="exercise-card">
+                        <div class="exercise-number">1</div>
+                        <div class="exercise-question">
+                            <p><strong>Variables expérimentales :</strong><br>
+                            Complétez : ______ a un effet sur ______.<br>
+                            Variable 1 : prix de la facture<br>
+                            Variable 2 : consommation d'électricité</p>
+                        </div>
+                        <button class="correction-btn" onclick="toggleCorrection('task6-ex1')">
+                            <span>👁️</span> Voir la correction
+                        </button>
+                        <div class="correction" id="task6-ex1">
+                            <div class="correction-title"><span>✅</span> Correction</div>
+                            <p><strong>Réponse :</strong></p>
+                            <p><strong>Variable 2 a un effet sur Variable 1 ⚖️</strong></p>
+                            <p><em>La consommation d'électricité a un effet sur le prix de la facture.</em></p>
+                            <p><strong>Explication des variables :</strong></p>
+                            <ul>
+                                <li><strong>Variable indépendante (VI) :</strong> Consommation d'électricité<br>
+                                <em>C'est la variable qu'on fait varier volontairement</em></li>
+                                <li><strong>Variable dépendante (VD) :</strong> Prix de la facture<br>
+                                <em>C'est la variable qu'on mesure, qui dépend de la VI</em></li>
+                            </ul>
+                            <p><strong>Relation :</strong> VI → VD (la VI influence la VD)</p>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 2 - Tâche 6 -->
+                    <div class="exercise-card">
+                        <div class="exercise-number">2</div>
+                        <div class="exercise-question">
+                            <p><strong>Protocole expérimental :</strong><br>
+                            À partir de quoi élabore-t-on un protocole expérimental ?<br>
+                            a. À partir des résultats<br>
+                            b. À partir d'une hypothèse<br>
+                            c. À partir d'une observation</p>
+                        </div>
+                        <button class="correction-btn" onclick="toggleCorrection('task6-ex2')">
+                            <span>👁️</span> Voir la correction
+                        </button>
+                        <div class="correction" id="task6-ex2">
+                            <div class="correction-title"><span>✅</span> Correction</div>
+                            <p><strong>Réponse correcte : b. À partir d'une hypothèse 💡</strong></p>
+                            <p><strong>Explication :</strong></p>
+                            <ul>
+                                <li>L'hypothèse contient les variables à étudier</li>
+                                <li>Exemple d'hypothèse : "Si un animal respire, alors le dioxygène diminue et le dioxyde de carbone augmente"</li>
+                                <li>À partir de cette hypothèse, on peut élaborer un protocole pour tester cette affirmation</li>
+                            </ul>
+                            <p><strong>Étapes d'élaboration d'un protocole :</strong></p>
+                            <ol>
+                                <li>Identifier les variables (VI et VD)</li>
+                                <li>Déterminer comment faire varier la VI</li>
+                                <li>Choisir comment mesurer/observer les VD</li>
+                                <li>Prévoir un témoin pour comparaison</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 3 - Tâche 6 -->
+                    <div class="exercise-card">
+                        <div class="exercise-number">3</div>
+                        <div class="exercise-question">
+                            <p><strong>Résultats attendus :</strong><br>
+                            Ahmed et Lina testent l'hypothèse : "Si la souris respire, alors O₂ diminue et CO₂ augmente."<br>
+                            Quels résultats attendent-ils ?</p>
+                        </div>
+                        <button class="correction-btn" onclick="toggleCorrection('task6-ex3')">
+                            <span>👁️</span> Voir la correction
+                        </button>
+                        <div class="correction" id="task6-ex3">
+                            <div class="correction-title"><span>✅</span> Correction</div>
+                            <p><strong>Résultats attendus :</strong></p>
+                            <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+                                <tr style="background-color: #f5f5f5;">
+                                    <th style="padding: 10px; text-align: left;">Dispositif</th>
+                                    <th style="padding: 10px; text-align: left;">O₂ (oxymètre)</th>
+                                    <th style="padding: 10px; text-align: left;">CO₂ (eau de chaux)</th>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">Témoin (boîte vide)</td>
+                                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">Stable 📊</td>
+                                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">Claire 💧</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px;">Test (boîte avec souris)</td>
+                                    <td style="padding: 10px;"><strong>Diminue</strong> 📉</td>
+                                    <td style="padding: 10px;"><strong>Augmente</strong> (eau trouble) 🌫️</td>
+                                </tr>
+                            </table>
+                            <p><strong>Explication :</strong></p>
+                            <ul>
+                                <li>La respiration consomme du dioxygène (O₂)</li>
+                                <li>La respiration produit du dioxyde de carbone (CO₂)</li>
+                                <li>L'eau de chaux se trouble en présence de CO₂</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 4 - Tâche 6 -->
+                    <div class="exercise-card">
+                        <div class="exercise-number">4</div>
+                        <div class="exercise-question">
+                            <p><strong>Varier la variable indépendante :</strong><br>
+                            Comment varier la VI "présence de la souris" dans l'expérience ?<br>
+                            Choisissez le dispositif correct :<br>
+                            a. Deux boîtes, chacune avec une souris<br>
+                            b. Une boîte avec souris, une boîte vide (témoin)</p>
+                        </div>
+                        <button class="correction-btn" onclick="toggleCorrection('task6-ex4')">
+                            <span>👁️</span> Voir la correction
+                        </button>
+                        <div class="correction" id="task6-ex4">
+                            <div class="correction-title"><span>✅</span> Correction</div>
+                            <p><strong>Réponse correcte : b. Une boîte avec souris, une boîte vide (témoin) 🧫</strong></p>
+                            <p><strong>Explication :</strong></p>
+                            <ul>
+                                <li><strong>Variable indépendante :</strong> Présence de la souris 🐭</li>
+                                <li><strong>Deux conditions :</strong>
+                                    <ul>
+                                        <li><strong>Témoin :</strong> Absence de souris (boîte vide)</li>
+                                        <li><strong>Test :</strong> Présence de souris (boîte avec souris)</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <p><strong>Importance du témoin :</strong></p>
+                            <p>Le témoin permet de :</p>
+                            <ul>
+                                <li>Comparer les résultats ⚖️</li>
+                                <li>Vérifier que les changements observés sont bien dus à la présence de la souris</li>
+                                <li>Éliminer d'autres facteurs qui pourraient influencer les résultats</li>
+                            </ul>
+                            <p><strong>Règle d'or :</strong> Toute expérience scientifique doit avoir un témoin !</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <h3>Compétences Développées</h3>
+            <div style="margin: 20px 0;">
+                <span class="competence-badge">Observer 🔍</span>
+                <span class="competence-badge">Classifier 📊</span>
+                <span class="competence-badge">Expérimenter 🧪</span>
+                <span class="competence-badge">Raisonner 🧠</span>
+                <span class="competence-badge">Communiquer 💬</span>
+                <span class="competence-badge">Analyser 📈</span>
+            </div>
+            <p>© 2023 - Sciences de la Vie et de la Terre - 1ère Année Collège - Période 1</p>
+            <p>Total : 19 exercices corrigés répartis sur 5 tâches pédagogiques</p>
+        </footer>
+    </div>
+
+    <!-- Modal for Task Details -->
+    <div class="detail-modal" id="detailModal">
+        <div class="modal-content">
+            <div class="modal-header task-2" id="modalHeader">
+                <button class="modal-close" onclick="closeModal()">×</button>
+                <div class="task-number" id="modalTaskNumber">TÂCHE 2</div>
+                <h2 class="task-title" id="modalTitle"><span class="task-icon" id="modalIcon">🌳</span> Diversité des Écosystèmes</h2>
+                <div class="task-theme" id="modalTheme">Biocénose et Biotope</div>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Dynamic content -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation between sections
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update active tab
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Set corresponding tab as active
+            const tabBtn = document.querySelector(`.tab-btn[onclick="showSection('${sectionId}')"]`);
+            if (tabBtn) tabBtn.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle correction visibility
+        function toggleCorrection(exerciseId) {
+            const correction = document.getElementById(exerciseId);
+            const button = correction.previousElementSibling;
+            
+            if (correction.classList.contains('show')) {
+                correction.classList.remove('show');
+                button.innerHTML = '<span>👁️</span> Voir la correction';
+            } else {
+                // Close all other corrections
+                document.querySelectorAll('.correction.show').forEach(c => {
+                    if (c.id !== exerciseId) {
+                        c.classList.remove('show');
+                        c.previousElementSibling.innerHTML = '<span>👁️</span> Voir la correction';
+                    }
+                });
+                
+                correction.classList.add('show');
+                button.innerHTML = '<span>👁️</span> Masquer la correction';
+                
+                // Scroll to the correction
+                setTimeout(() => {
+                    correction.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 300);
+            }
+        }
+
+        // Task details modal data
+        const tasksData = {
+            2: {
+                title: "Diversité et Unité des Écosystèmes",
+                icon: "🌳",
+                theme: "Biocénose et Biotope",
+                steps: [
+                    "Identifier les éléments de la biocénose et du biotope",
+                    "Citer deux différences entre les écosystèmes",
+                    "Déduire la diversité des écosystèmes",
+                    "Justifier l'unité des écosystèmes"
+                ]
+            },
+            3: {
+                title: "Déterminer le Groupe d'un Animal",
+                icon: "🦊",
+                theme: "Classification animale",
+                steps: [
+                    "Déterminer les attributs de l'animal",
+                    "Utiliser une clé de détermination simplifiée"
+                ]
+            },
+            4: {
+                title: "Déterminer le Groupe d'un Végétal",
+                icon: "🌿",
+                theme: "Classification végétale",
+                steps: [
+                    "Déterminer les attributs du végétal",
+                    "Utiliser la clé de détermination des végétaux"
+                ]
+            },
+            5: {
+                title: "Démarche d'Investigation Expérimentale",
+                icon: "🔬",
+                theme: "Méthode scientifique",
+                steps: [
+                    "Se questionner",
+                    "Formuler une hypothèse",
+                    "Élaborer un protocole",
+                    "Mettre en œuvre",
+                    "Conclure et généraliser"
+                ]
+            },
+            6: {
+                title: "Respiration des Animaux",
+                icon: "💨",
+                theme: "Protocole expérimental",
+                steps: [
+                    "Identifier les variables à étudier",
+                    "Faire varier la variable indépendante",
+                    "Mesurer/observer les variables dépendantes",
+                    "Comparer les résultats"
+                ]
+            }
+        };
+
+        // Show task details modal
+        function showTaskDetails(taskNumber) {
+            const task = tasksData[taskNumber];
+            const modal = document.getElementById('detailModal');
+            const modalHeader = document.getElementById('modalHeader');
+            const modalBody = document.getElementById('modalBody');
+            
+            // Change header color
+            modalHeader.className = `modal-header task-${taskNumber}`;
+            
+            // Update content
+            document.getElementById('modalTaskNumber').textContent = `TÂCHE ${taskNumber}`;
+            document.getElementById('modalIcon').textContent = task.icon;
+            document.getElementById('modalTitle').innerHTML = `<span class="task-icon">${task.icon}</span> ${task.title}`;
+            document.getElementById('modalTheme').textContent = task.theme;
+            
+            // Generate content
+            modalBody.innerHTML = `
+                <h3>📋 Objectif de la Tâche</h3>
+                <p>Cette tâche vise à développer les compétences suivantes :</p>
+                
+                <h3>🎯 Étapes Méthodologiques</h3>
+                <ul class="step-list">
+                    ${task.steps.map(step => `<li>${step}</li>`).join('')}
+                </ul>
+                
+                <h3>📊 Exercices Associés</h3>
+                <p>Cette tâche comprend plusieurs exercices d'application :</p>
+                <div style="background-color: #f8f9fa; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                    <p><strong>Consultez les exercices corrigés dans la section dédiée :</strong></p>
+                    <button class="correction-btn" onclick="showSection('task${taskNumber}'); closeModal();" style="margin-top: 10px;">
+                        <span>📝</span> Voir les ${taskNumber === 2 ? '4' : taskNumber === 3 ? '5' : taskNumber === 4 ? '3' : taskNumber === 5 ? '3' : '4'} exercices de la Tâche ${taskNumber}
+                    </button>
+                </div>
+                
+                <h3>💡 Conseils Pédagogiques</h3>
+                <ul style="list-style-type: none; padding-left: 0;">
+                    <li style="padding: 10px 0; border-bottom: 1px dashed #eee;">✅ Utilisez des exemples concrets de l'environnement proche</li>
+                    <li style="padding: 10px 0; border-bottom: 1px dashed #eee;">✅ Encouragez l'observation et la manipulation</li>
+                    <li style="padding: 10px 0; border-bottom: 1px dashed #eee;">✅ Validez chaque étape avant de passer à la suivante</li>
+                    <li style="padding: 10px 0;">✅ Favorisez le travail en groupe et les échanges</li>
+                </ul>
+            `;
+            
+            // Show modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('detailModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on outside click
+        document.getElementById('detailModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Initialize - show first section
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('tasks');
+        });
+    </script>
+</body>
+</html>
